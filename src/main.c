@@ -4,7 +4,7 @@
 LPCWSTR WndClassName = TEXT("DefaultUserInterface");
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR CmdLine, int CmdShow)
-{	
+{
 	FuncRegisterClass(hInstance);
 
 	HWND hwnd = CreateWindowEx(
@@ -28,21 +28,62 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR CmdLine, 
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	int ButtonGridWidth = WIDTH / 5;
-	int ButtonGridHeight = (HEIGHT / 7) + 50;
+	const ButtonSize = (int)40;
 	switch (uMsg) {
 	case WM_CREATE: {
-		FuncCreateButton(TEXT("7"), ButtonGridWidth, ButtonGridHeight, 70, 50, hwnd, IDC_BUTTON_DOWN_7);
-		FuncCreateButton(TEXT("8"), ButtonGridWidth * 2, ButtonGridHeight, 70, 50, hwnd, IDC_BUTTON_DOWN_8);
-		FuncCreateButton(TEXT("9"), ButtonGridWidth * 3, ButtonGridHeight, 70, 50, hwnd, IDC_BUTTON_DOWN_9);
+		CreateWindow(TEXT("BUTTON"), TEXT("7"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
+			5, 65, ButtonSize, ButtonSize,
+			hwnd, IDC_BUTTON_DOWN_7, NULL, NULL);
+		CreateWindow(TEXT("BUTTON"), TEXT("8"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
+			50, 65, ButtonSize, ButtonSize,
+			hwnd, IDC_BUTTON_DOWN_7, NULL, NULL);
+		CreateWindow(TEXT("BUTTON"), TEXT("9"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
+			95, 65, ButtonSize, ButtonSize,
+			hwnd, IDC_BUTTON_DOWN_7, NULL, NULL);
+		CreateWindow(TEXT("BUTTON"), TEXT("+"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
+			140, 65, ButtonSize, ButtonSize,
+			hwnd, IDC_BUTTON_DOWN_7, NULL, NULL);
 
-		FuncCreateButton(TEXT("4"), ButtonGridWidth, ButtonGridHeight * 2, 70, 50, hwnd, IDC_BUTTON_DOWN_4);
-		FuncCreateButton(TEXT("5"), ButtonGridWidth * 2, ButtonGridHeight * 2, 70, 50, hwnd, IDC_BUTTON_DOWN_5);
-		FuncCreateButton(TEXT("6"), ButtonGridWidth * 3, ButtonGridHeight * 2, 70, 50, hwnd, IDC_BUTTON_DOWN_6);
+		CreateWindow(TEXT("BUTTON"), TEXT("4"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
+			5, 110, ButtonSize, ButtonSize,
+			hwnd, IDC_BUTTON_DOWN_7, NULL, NULL);
+		CreateWindow(TEXT("BUTTON"), TEXT("5"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
+			50, 110, ButtonSize, ButtonSize,
+			hwnd, IDC_BUTTON_DOWN_7, NULL, NULL);
+		CreateWindow(TEXT("BUTTON"), TEXT("6"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
+			95, 110, ButtonSize, ButtonSize,
+			hwnd, IDC_BUTTON_DOWN_7, NULL, NULL);
+		CreateWindow(TEXT("BUTTON"), TEXT("-"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
+			140, 110, ButtonSize, ButtonSize,
+			hwnd, IDC_BUTTON_DOWN_7, NULL, NULL);
 
-		FuncCreateButton(TEXT("1"), ButtonGridWidth, ButtonGridHeight * 3, 70, 50, hwnd, IDC_BUTTON_DOWN_1);
-		FuncCreateButton(TEXT("2"), ButtonGridWidth * 2, ButtonGridHeight * 3, 70, 50, hwnd, IDC_BUTTON_DOWN_2);
-		FuncCreateButton(TEXT("3"), ButtonGridWidth * 3, ButtonGridHeight * 3, 70, 50, hwnd, IDC_BUTTON_DOWN_3);
+		CreateWindow(TEXT("BUTTON"), TEXT("1"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
+			5, 155, ButtonSize, ButtonSize,
+			hwnd, IDC_BUTTON_DOWN_7, NULL, NULL);
+		CreateWindow(TEXT("BUTTON"), TEXT("2"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
+			50, 155, ButtonSize, ButtonSize,
+			hwnd, IDC_BUTTON_DOWN_7, NULL, NULL);
+		CreateWindow(TEXT("BUTTON"), TEXT("3"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
+			95, 155, ButtonSize, ButtonSize,
+			hwnd, IDC_BUTTON_DOWN_7, NULL, NULL);
+		CreateWindow(TEXT("BUTTON"), TEXT("X"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
+			140, 155, ButtonSize, ButtonSize,
+			hwnd, IDC_BUTTON_DOWN_7, NULL, NULL);
+
+		CreateWindow(TEXT("BUTTON"), TEXT("0"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
+			5, 200, ButtonSize, ButtonSize,
+			hwnd, IDC_BUTTON_DOWN_7, NULL, NULL);
+		CreateWindow(TEXT("BUTTON"), TEXT("."), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
+			50, 200, ButtonSize, ButtonSize,
+			hwnd, IDC_BUTTON_DOWN_7, NULL, NULL);
+		CreateWindow(TEXT("BUTTON"), TEXT("="), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
+			95, 200, ButtonSize, ButtonSize,
+			hwnd, IDC_BUTTON_DOWN_7, NULL, NULL);
+		CreateWindow(TEXT("BUTTON"), TEXT("/"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
+			140, 200, ButtonSize, ButtonSize,
+			hwnd, IDC_BUTTON_DOWN_7, NULL, NULL);
+
+
 		break;
 	}
 	case WM_COMMAND: {
@@ -59,8 +100,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 	default: {
 		return DefWindowProc(hwnd, uMsg, wParam, lParam);
-		}
-	}	
+	}
+	}
 	UpdateWindow(hwnd);
 	return 0;
 }
@@ -78,14 +119,3 @@ int WINAPI FuncRegisterClass(HINSTANCE hInstance)
 	return RegisterClass(&wc);
 }
 
-HWND WINAPI FuncCreateButton(LPSTR string, UINT x, UINT y, UINT w, UINT h, HWND hParent, int idC)
-{
-	HWND hButton = CreateWindow(
-		TEXT("BUTTON"),
-		string,
-		WS_TABSTOP | WS_VISIBLE | WS_CHILD,
-		x, y, w, h,
-		hParent,
-		idC, NULL, NULL);
-	return hButton;
-}
