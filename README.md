@@ -1,5 +1,3 @@
-# Calculator
-
 <img src="https://i.imgur.com/6lzpINN.png"/>
 
 ## Introduction
