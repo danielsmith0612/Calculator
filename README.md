@@ -1,3 +1,26 @@
 # Calculator
 
-Let's make a calculator with windows API
+<img src="https://i.imgur.com/6lzpINN.png"/>
+
+## Introduction
+
+The Simple Calculator with using C & Win32API
+
+## Contact
+
+When you found the bug, or something question or just wanna say "hi", please leave the [issue](https://github.com/danielsmith0612/Calculator/issues) or send the [email](mailto:danielsmith0612@gmail.com) to me!
+I'll send a reply as faster as possible
+
+## License
+
+<img alt="OSI Approved License Logo" hspace="20" src="https://opensource.org/files/OSI_Approved_License.png" align="right"  width="150">
+
+MIT License
+
+Copyright (c) 2019 DanielSmith
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
