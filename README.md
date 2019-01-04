@@ -2,6 +2,9 @@
 
 ## Introduction
 
+<p align="center">
+	<img src="https://i.imgur.com/zhgT7DF.png" width="200">
+</p>
 The Simple Calculator with using C & Win32API
 
 ## Contact
@@ -11,7 +14,7 @@ I'll send a reply as faster as possible
 
 ## License
 
-<img alt="OSI Approved License Logo" hspace="20" src="https://opensource.org/files/OSI_Approved_License.png" align="right"  width="150">
+<img alt="OSI Approved License Logo" hspace="20" src="https://opensource.org/files/OSI_Approved_License.png" align="right"  width="150" height="200">
 
 MIT License
 
