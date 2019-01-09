@@ -96,47 +96,66 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_COMMAND: {
 		switch (LOWORD(wParam)) {
 		case IDC_BUTTON_DOWN_0: {
-			InsertString(0x30);
+			InsertString(HEX_NUMBER_0);
 			break;
 		}
 		case IDC_BUTTON_DOWN_1: {
-			InsertString(0x31);
+			InsertString(HEX_NUMBER_1);
 			break;
 		}
 		case IDC_BUTTON_DOWN_2: {
-			InsertString(0x32);
+			InsertString(HEX_NUMBER_2);
 			break;
 		}
 		case IDC_BUTTON_DOWN_3: {
-			InsertString(0x33);
+			InsertString(HEX_NUMBER_3);
 			break;
 		}
 		case IDC_BUTTON_DOWN_4: {
-			InsertString(0x34);
+			InsertString(HEX_NUMBER_4);
 			break;
 		}
 		case IDC_BUTTON_DOWN_5: {
-			InsertString(0x35);
+			InsertString(HEX_NUMBER_5);
 			break;
 		}
 		case IDC_BUTTON_DOWN_6: {
-			InsertString(0x36);
+			InsertString(HEX_NUMBER_6);
 			break;
 		}
 		case IDC_BUTTON_DOWN_7: {
-			InsertString(0x37);
+			InsertString(HEX_NUMBER_7);
 			break;
 		}
 		case IDC_BUTTON_DOWN_8: {
-			InsertString(0x38);
+			InsertString(HEX_NUMBER_8);
 			break;
 		}
 		case IDC_BUTTON_DOWN_9: {
-			InsertString(0x39);
+			InsertString(HEX_NUMBER_9);
 			break;
 		}
 		case IDC_BUTTON_DOWN_ADD: {
-			InsertString(0x2B);
+			InsertString(HEX_EXPRESSION_ADD);
+			break;
+		}
+		case IDC_BUTTON_DOWN_SUB: {
+			InsertString(HEX_EXPRESSION_SUB);
+			break;
+		}
+		case IDC_BUTTON_DOWN_MUL: {
+			InsertString(HEX_EXPRESSION_MUL);
+			break;
+		}	
+		case IDC_BUTTON_DOWN_DIV: {
+			InsertString(HEX_EXPRESSION_DIV);
+			break;
+		}
+		case IDC_BUTTON_DOWN_DOT: {
+			InsertString(HEX_EXPRESSION_DOT);
+			break;
+		}
+		case IDC_BUTTON_DOWN_RESULT: {
 			break;
 		}
 		}
