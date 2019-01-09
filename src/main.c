@@ -2,6 +2,11 @@
 #include "main.h"
 
 LPCWSTR WndClassName = TEXT("DefaultUserInterface");
+char EditBuffer[32] = { NULL };
+UINT length = 0;
+long double temp = 0, result = 0;
+
+HWND hWndEdit = NULL;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR CmdLine, int CmdShow)
 {
@@ -31,6 +36,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	const ButtonSize = (int)40;
 	switch (uMsg) {
 	case WM_CREATE: {
+		hWndEdit = CreateWindow(TEXT("EDIT"), NULL, WS_CHILD | WS_VISIBLE | ES_LEFT | WS_BORDER,
+			3, 10, 180, 40,
+			hwnd, IDC_EDIT, NULL, NULL);
+
 		CreateWindow(TEXT("BUTTON"), TEXT("7"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
 			5, 65, ButtonSize, ButtonSize,
 			hwnd, IDC_BUTTON_DOWN_7, NULL, NULL);
@@ -85,10 +94,51 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 	}
 	case WM_COMMAND: {
-		switch (LOWORD(wParam)) { // button event process
-		case IDC_BUTTON_DOWN_1:
-
+		switch (LOWORD(wParam)) {
+		case IDC_BUTTON_DOWN_0: {
+			InsertString(0x30);
 			break;
+		}
+		case IDC_BUTTON_DOWN_1: {
+			InsertString(0x31);
+			break;
+		}
+		case IDC_BUTTON_DOWN_2: {
+			InsertString(0x32);
+			break;
+		}
+		case IDC_BUTTON_DOWN_3: {
+			InsertString(0x33);
+			break;
+		}
+		case IDC_BUTTON_DOWN_4: {
+			InsertString(0x34);
+			break;
+		}
+		case IDC_BUTTON_DOWN_5: {
+			InsertString(0x35);
+			break;
+		}
+		case IDC_BUTTON_DOWN_6: {
+			InsertString(0x36);
+			break;
+		}
+		case IDC_BUTTON_DOWN_7: {
+			InsertString(0x37);
+			break;
+		}
+		case IDC_BUTTON_DOWN_8: {
+			InsertString(0x38);
+			break;
+		}
+		case IDC_BUTTON_DOWN_9: {
+			InsertString(0x39);
+			break;
+		}
+		case IDC_BUTTON_DOWN_ADD: {
+			InsertString(0x2B);
+			break;
+		}
 		}
 		break;
 	}
@@ -117,3 +167,11 @@ int WINAPI FuncRegisterClass(HINSTANCE hInstance)
 	return RegisterClass(&wc);
 }
 
+UINT WINAPI InsertString(UINT str) {
+	length = GetWindowText(hWndEdit, EditBuffer, 20);
+	EditBuffer[length * 2] = str;
+	EditBuffer[(length * 2) + 1] = NULL;
+
+	SetWindowText(hWndEdit, EditBuffer);
+	return 0;
+}

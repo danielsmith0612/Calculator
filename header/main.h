@@ -5,6 +5,23 @@
 #define WIDTH  (201)
 #define HEIGHT (285)
 
+#define HEX_NUMBER_0 (0x30)
+#define HEX_NUMBER_1 (0x31)
+#define HEX_NUMBER_2 (0x32)
+#define HEX_NUMBER_3 (0x33)
+#define HEX_NUMBER_4 (0x34)
+#define HEX_NUMBER_5 (0x35)
+#define HEX_NUMBER_6 (0x36)
+#define HEX_NUMBER_7 (0x37)
+#define HEX_NUMBER_8 (0x38)
+#define HEX_NUMBER_9 (0x39)
+
+#define HEX_EXPRESSION_ADD (0x2B)
+#define HEX_EXPRESSION_SUB (0x2D)
+#define HEX_EXPRESSION_MUL (0x2A)
+#define HEX_EXPRESSION_DIV (0x2F)
+#define HEX_EXPRESSION_DOT (0x2E)
+
 #define IDC_BUTTON_DOWN_0 (0)
 #define IDC_BUTTON_DOWN_1 (1)
 #define IDC_BUTTON_DOWN_2 (2)
