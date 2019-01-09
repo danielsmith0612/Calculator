@@ -23,9 +23,13 @@
 #define IDC_BUTTON_DOWN_DOT (14)
 #define IDC_BUTTON_DOWN_RESULT (15)
 
+#define IDC_EDIT (16)
+
 int WINAPI FuncRegisterClass(HINSTANCE hInstance);
 HWND WINAPI FuncCreateButton(LPSTR string, UINT x, UINT y, UINT w, UINT h, HWND hParent);
 HWND WINAPI FuncCreateButton(LPSTR string, UINT x, UINT y, UINT w, UINT h, HWND hParent, int idC);
+
+UINT WINAPI InsertString(UINT str);
 
 #endif
 
