@@ -1,12 +1,16 @@
 #include <windows.h>
 #include "main.h"
 
-LPCWSTR WndClassName = TEXT("DefaultUserInterface");
-char EditBuffer[32] = { NULL };
-UINT length = 0;
-long double temp = 0, result = 0;
+#define BUFFER_SIZE (128)
 
-HWND hWndEdit = NULL;
+LPCWSTR WndClassName = TEXT("DefaultUserInterface");
+char StringBuffer[BUFFER_SIZE];
+UINT StringLength = 0;
+int Value = 0, FirstValue = 0, SecondValue = 0;
+long double Result = 0;
+UINT CurrentExpression;
+char temp[BUFFER_SIZE];
+HWND hWndEditTextBox;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR CmdLine, int CmdShow)
 {
@@ -33,131 +37,149 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR CmdLine, 
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	const ButtonSize = (int)40;
 	switch (uMsg) {
 	case WM_CREATE: {
-		hWndEdit = CreateWindow(TEXT("EDIT"), NULL, WS_CHILD | WS_VISIBLE | ES_LEFT | WS_BORDER,
+		hWndEditTextBox = CreateWindow(TEXT("EDIT"), NULL, WS_CHILD | WS_VISIBLE | ES_LEFT | WS_BORDER,
 			3, 10, 180, 40,
 			hwnd, IDC_EDIT, NULL, NULL);
-
-		CreateWindow(TEXT("BUTTON"), TEXT("7"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
-			5, 65, ButtonSize, ButtonSize,
-			hwnd, IDC_BUTTON_DOWN_7, NULL, NULL);
-		CreateWindow(TEXT("BUTTON"), TEXT("8"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
-			50, 65, ButtonSize, ButtonSize,
-			hwnd, IDC_BUTTON_DOWN_8, NULL, NULL);
-		CreateWindow(TEXT("BUTTON"), TEXT("9"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
-			95, 65, ButtonSize, ButtonSize,
-			hwnd, IDC_BUTTON_DOWN_9, NULL, NULL);
-		CreateWindow(TEXT("BUTTON"), TEXT("+"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
-			140, 65, ButtonSize, ButtonSize,
-			hwnd, IDC_BUTTON_DOWN_ADD, NULL, NULL);
-
-		CreateWindow(TEXT("BUTTON"), TEXT("4"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
-			5, 110, ButtonSize, ButtonSize,
-			hwnd, IDC_BUTTON_DOWN_4, NULL, NULL);
-		CreateWindow(TEXT("BUTTON"), TEXT("5"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
-			50, 110, ButtonSize, ButtonSize,
-			hwnd, IDC_BUTTON_DOWN_5, NULL, NULL);
-		CreateWindow(TEXT("BUTTON"), TEXT("6"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
-			95, 110, ButtonSize, ButtonSize,
-			hwnd, IDC_BUTTON_DOWN_6, NULL, NULL);
-		CreateWindow(TEXT("BUTTON"), TEXT("-"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
-			140, 110, ButtonSize, ButtonSize,
-			hwnd, IDC_BUTTON_DOWN_SUB, NULL, NULL);
-
-		CreateWindow(TEXT("BUTTON"), TEXT("1"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
-			5, 155, ButtonSize, ButtonSize,
-			hwnd, IDC_BUTTON_DOWN_1, NULL, NULL);
-		CreateWindow(TEXT("BUTTON"), TEXT("2"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
-			50, 155, ButtonSize, ButtonSize,
-			hwnd, IDC_BUTTON_DOWN_2, NULL, NULL);
-		CreateWindow(TEXT("BUTTON"), TEXT("3"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
-			95, 155, ButtonSize, ButtonSize,
-			hwnd, IDC_BUTTON_DOWN_3, NULL, NULL);
-		CreateWindow(TEXT("BUTTON"), TEXT("X"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
-			140, 155, ButtonSize, ButtonSize,
-			hwnd, IDC_BUTTON_DOWN_MUL, NULL, NULL);
-
-		CreateWindow(TEXT("BUTTON"), TEXT("0"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
-			5, 200, ButtonSize, ButtonSize,
-			hwnd, IDC_BUTTON_DOWN_0, NULL, NULL);
-		CreateWindow(TEXT("BUTTON"), TEXT("."), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
-			50, 200, ButtonSize, ButtonSize,
-			hwnd, IDC_BUTTON_DOWN_DOT, NULL, NULL);
-		CreateWindow(TEXT("BUTTON"), TEXT("="), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
-			95, 200, ButtonSize, ButtonSize,
-			hwnd, IDC_BUTTON_DOWN_RESULT, NULL, NULL);
-		CreateWindow(TEXT("BUTTON"), TEXT("/"), WS_TABSTOP | WS_VISIBLE | WS_CHILD,
-			140, 200, ButtonSize, ButtonSize,
-			hwnd, IDC_BUTTON_DOWN_DIV, NULL, NULL);
+		CreateButton(hwnd);
 		break;
 	}
 	case WM_COMMAND: {
 		switch (LOWORD(wParam)) {
 		case IDC_BUTTON_DOWN_0: {
-			InsertString(HEX_NUMBER_0);
+			fnInsertStrings(hWndEditTextBox, "0");
+			Value = (Value * 10);
 			break;
 		}
 		case IDC_BUTTON_DOWN_1: {
-			InsertString(HEX_NUMBER_1);
+			fnInsertStrings(hWndEditTextBox, "1");
+			Value = (Value * 10) + 1;
 			break;
 		}
 		case IDC_BUTTON_DOWN_2: {
-			InsertString(HEX_NUMBER_2);
+			fnInsertStrings(hWndEditTextBox, "2");
+			Value = (Value * 10) + 2;
 			break;
 		}
 		case IDC_BUTTON_DOWN_3: {
-			InsertString(HEX_NUMBER_3);
+			fnInsertStrings(hWndEditTextBox, "3");
+			Value = (Value * 10) + 3;
 			break;
 		}
 		case IDC_BUTTON_DOWN_4: {
-			InsertString(HEX_NUMBER_4);
+			fnInsertStrings(hWndEditTextBox, "4");
+			Value = (Value * 10) + 4;
 			break;
 		}
 		case IDC_BUTTON_DOWN_5: {
-			InsertString(HEX_NUMBER_5);
+			fnInsertStrings(hWndEditTextBox, "5");
+			Value = (Value * 10) + 5;
 			break;
 		}
 		case IDC_BUTTON_DOWN_6: {
-			InsertString(HEX_NUMBER_6);
+			fnInsertStrings(hWndEditTextBox, "6");
+			Value = (Value * 10) + 6;
 			break;
 		}
 		case IDC_BUTTON_DOWN_7: {
-			InsertString(HEX_NUMBER_7);
+			fnInsertStrings(hWndEditTextBox, "7");
+			Value = (Value * 10) + 7;
 			break;
 		}
 		case IDC_BUTTON_DOWN_8: {
-			InsertString(HEX_NUMBER_8);
+			fnInsertStrings(hWndEditTextBox, "8");
+			Value = (Value * 10) + 8;
 			break;
 		}
 		case IDC_BUTTON_DOWN_9: {
-			InsertString(HEX_NUMBER_9);
-			break;
+			fnInsertStrings(hWndEditTextBox, "9");
+			Value = (Value * 10) + 9;
+			break;		
 		}
 		case IDC_BUTTON_DOWN_ADD: {
-			InsertString(HEX_EXPRESSION_ADD);
+			FirstValue += Value;
+			Value = 0;
+			fnClearStrings(hWndEditTextBox);
+
+			CurrentExpression = FLAG_ADD;
 			break;
 		}
 		case IDC_BUTTON_DOWN_SUB: {
-			InsertString(HEX_EXPRESSION_SUB);
+			if (FirstValue == 0) {
+				FirstValue = Value;
+			}
+			else {
+				FirstValue -= Value;
+			}
+			Value = 0;
+			fnClearStrings(hWndEditTextBox);
+			CurrentExpression = FLAG_SUB;
 			break;
 		}
 		case IDC_BUTTON_DOWN_MUL: {
-			InsertString(HEX_EXPRESSION_MUL);
-			break;
-		}	
-		case IDC_BUTTON_DOWN_DIV: {
-			InsertString(HEX_EXPRESSION_DIV);
+			if (FirstValue == 0) {
+				FirstValue = Value;
+			}
+			else {
+				FirstValue *= Value;
+			}
+			Value = 0;
+			fnClearStrings(hWndEditTextBox);
+			
+			CurrentExpression = FLAG_MUL;
 			break;
 		}
-		case IDC_BUTTON_DOWN_DOT: {
-			InsertString(HEX_EXPRESSION_DOT);
+		case IDC_BUTTON_DOWN_DIV: {
+			if (FirstValue == 0) {
+				FirstValue = Value;
+			}
+			else {
+				FirstValue /= Value;
+			}
+			Value = 0;
+			fnClearStrings(hWndEditTextBox);
+		
+			CurrentExpression = FLAG_DIV;
+			break;
+		}
+		case IDC_BUTTON_DOWN_DEL: {
+			StringLength = GetWindowText(hWndEditTextBox, StringBuffer, BUFFER_SIZE);
+			StringBuffer[(StringLength - 1) * 2] = NULL;
+			SetWindowText(hWndEditTextBox, StringBuffer);
 			break;
 		}
 		case IDC_BUTTON_DOWN_RESULT: {
+			SecondValue = Value;
+			switch (CurrentExpression) {
+			case FLAG_ADD: {
+				Result = FirstValue + SecondValue;
+				break;
+			}
+			case FLAG_SUB: {
+				Result = FirstValue - SecondValue;
+				break;
+			}
+			case FLAG_MUL: {
+				Result = FirstValue * SecondValue;
+				break;
+			}
+			case FLAG_DIV: {
+				Result = FirstValue / SecondValue;
+				break;
+			}
+			default: {
+				MessageBox(hwnd, TEXT("Error: please enter expression one or more"), TEXT("Calculator"), MB_OK);
+			}
+			}
+			fnClearStrings(hWndEditTextBox);
+			itoa(Result, temp, 10);
+			fnInsertStrings(hWndEditTextBox, &temp);
+
+			FirstValue = Result;
+			Result = 0;
 			break;
-		}
+		}		
 		}
 		break;
 	}
@@ -186,11 +208,7 @@ int WINAPI FuncRegisterClass(HINSTANCE hInstance)
 	return RegisterClass(&wc);
 }
 
-UINT WINAPI InsertString(UINT str) {
-	length = GetWindowText(hWndEdit, EditBuffer, 20);
-	EditBuffer[length * 2] = str;
-	EditBuffer[(length * 2) + 1] = NULL;
-
-	SetWindowText(hWndEdit, EditBuffer);
+UINT WINAPI fnRegisterClassButton(HINSTANCE hInstance)
+{
 	return 0;
 }
