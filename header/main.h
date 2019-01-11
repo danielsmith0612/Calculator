@@ -16,12 +16,6 @@
 #define HEX_NUMBER_8 (0x38)
 #define HEX_NUMBER_9 (0x39)
 
-#define HEX_EXPRESSION_ADD (0x2B)
-#define HEX_EXPRESSION_SUB (0x2D)
-#define HEX_EXPRESSION_MUL (0x2A)
-#define HEX_EXPRESSION_DIV (0x2F)
-#define HEX_EXPRESSION_DOT (0x2E)
-
 #define IDC_BUTTON_DOWN_0 (0)
 #define IDC_BUTTON_DOWN_1 (1)
 #define IDC_BUTTON_DOWN_2 (2)
@@ -37,16 +31,27 @@
 #define IDC_BUTTON_DOWN_SUB (11)
 #define IDC_BUTTON_DOWN_MUL (12)
 #define IDC_BUTTON_DOWN_DIV (13)
-#define IDC_BUTTON_DOWN_DOT (14)
+#define IDC_BUTTON_DOWN_DEL (14)
 #define IDC_BUTTON_DOWN_RESULT (15)
 
 #define IDC_EDIT (16)
+
+// FLAG bits
+#define FLAG_ADD (0x00000001)
+#define FLAG_SUB (0x00000010)
+#define FLAG_MUL (0x00000100)
+#define FLAG_DIV (0x00001000)
+#define FLAG_DEL (0x00010000)
 
 int WINAPI FuncRegisterClass(HINSTANCE hInstance);
 HWND WINAPI FuncCreateButton(LPSTR string, UINT x, UINT y, UINT w, UINT h, HWND hParent);
 HWND WINAPI FuncCreateButton(LPSTR string, UINT x, UINT y, UINT w, UINT h, HWND hParent, int idC);
 
+UINT WINAPI CreateButton(HWND hwnd);
 UINT WINAPI InsertString(UINT str);
+
+UINT WINAPI fnClearStrings(static HWND hwnd);
+UINT WINAPI fnInsertStrings(static HWND hwnd, static char String[]);
 
 #endif
 
