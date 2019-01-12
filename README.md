@@ -3,8 +3,9 @@
 ## Introduction
 
 <p align="center">
-	<img src="https://i.imgur.com/zhgT7DF.png" width="200">
+	<img src="https://media.giphy.com/media/orVBkhPPZgeYkP6Kym/giphy.gif"  width="300">
 </p>
+
 The Simple Calculator with using C & Win32API
 
 ## Contact
