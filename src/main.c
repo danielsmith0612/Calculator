@@ -98,7 +98,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			break;		
 		}
 		case IDC_BUTTON_DOWN_ADD: {
-			FirstValue += Value;
+			if (FirstValue == 0) {
+				FirstValue = Value;
+			}
+			else {
+				SecondValue = Value;
+			}
 			Value = 0;
 			fnClearStrings(hWndEditTextBox);
 
@@ -110,7 +115,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				FirstValue = Value;
 			}
 			else {
-				FirstValue -= Value;
+				SecondValue = Value;
 			}
 			Value = 0;
 			fnClearStrings(hWndEditTextBox);
@@ -122,7 +127,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				FirstValue = Value;
 			}
 			else {
-				FirstValue *= Value;
+				SecondValue = Value;
 			}
 			Value = 0;
 			fnClearStrings(hWndEditTextBox);
@@ -135,7 +140,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				FirstValue = Value;
 			}
 			else {
-				FirstValue /= Value;
+				SecondValue = Value;
 			}
 			Value = 0;
 			fnClearStrings(hWndEditTextBox);
@@ -176,6 +181,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			itoa(Result, temp, 10);
 			fnInsertStrings(hWndEditTextBox, &temp);
 
+			SecondValue = 0;
 			FirstValue = Result;
 			Result = 0;
 			break;
